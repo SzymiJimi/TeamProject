@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = sdddeede
+TARGET = projektZespolowy
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,10 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    addclient.cpp \
+    client.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    addclient.h \
+    client.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    addclient.ui

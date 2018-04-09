@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "qabstractbutton.h"
-#include "client.h"
+#include "./model/client.h"
 
 namespace Ui {
 class AddClient;

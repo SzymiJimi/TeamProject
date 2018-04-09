@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
-#include "addclient.h"
-#include "client.h"
+#include "dialog/addclient.h"
+#include "model/client.h"
 #include <QDebug>
 
 using namespace std;

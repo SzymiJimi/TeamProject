@@ -1,6 +1,6 @@
 #include "addclient.h"
 #include "ui_addclient.h"
-#include "client.h"
+#include "./model/client.h"
 #include "mainwindow.h"
 #include <QDebug>
 

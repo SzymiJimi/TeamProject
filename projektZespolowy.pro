@@ -26,14 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    addclient.cpp \
-    client.cpp
+    dialog/addclient.cpp \
+    model/client.cpp
 
 HEADERS += \
         mainwindow.h \
-    addclient.h \
-    client.h
+    dialog/addclient.h \
+    model/client.h
 
 FORMS += \
         mainwindow.ui \
-    addclient.ui
+    dialog/addclient.ui

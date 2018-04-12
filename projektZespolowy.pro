@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     dialog/addclient.cpp \
-    model/client.cpp
+    model/client.cpp \
+    services/savefile.cpp \
 
 HEADERS += \
         mainwindow.h \
     dialog/addclient.h \
-    model/client.h
+    model/client.h \
+    services/savefile.h \
 
 FORMS += \
         mainwindow.ui \

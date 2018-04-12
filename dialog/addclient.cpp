@@ -16,7 +16,6 @@ AddClient::~AddClient()
     delete ui;
 }
 
-
 Client* AddClient::getValues(){
     QString name= ui->name->text();
     QString surname=ui->surname->text();
@@ -26,7 +25,7 @@ Client* AddClient::getValues(){
     QString houseNr= ui->houseNr->text();
     QString postalCode= ui->postalCode->text();
     QString city= ui->city->text();
-    return new Client(name,surname,pesel,nip, street,houseNr, postalCode, city);
+    return new Client(0, name,surname,pesel,nip, street,houseNr, postalCode, city);
 }
 
 void AddClient::on_buttonBox_clicked(QAbstractButton *button)

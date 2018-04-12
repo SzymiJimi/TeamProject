@@ -533,7 +533,7 @@
        <rect>
         <x>10</x>
         <y>60</y>
-        <width>931</width>
+        <width>941</width>
         <height>491</height>
        </rect>
       </property>
@@ -546,6 +546,11 @@
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>116</number>
       </attribute>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </column>
       <column>
        <property name="text">
         <string>Imię</string>

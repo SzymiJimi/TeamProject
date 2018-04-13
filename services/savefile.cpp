@@ -67,26 +67,9 @@ std::list<Client> SaveFile::loadClientsFromFile()
          QByteArray city=inFile.readLine();
          position=city.lastIndexOf(QChar('\n'));
 
-         qDebug()<<endl;
-         qDebug()<< "pozycja: "<<position;
-         qDebug()<< "size: "<<city.size();
-         qDebug()<<endl;
          if(!(position==-1&&city.size()>0)){
-             qDebug()<<"Weszło w warunek!";
             city=city.left(position);
          }
-
-        qDebug()<<endl;
-         qDebug()<<"Przed dodaniem do obiektu";
-         qDebug()<<id ;
-         qDebug()<<name ;
-         qDebug()<< surname;
-         qDebug()<< pesel;
-         qDebug()<<nip ;
-         qDebug()<< street;
-         qDebug()<<houseNr ;
-         qDebug()<< postalCode;
-         qDebug()<< city;
 
          client.setId(id.toInt());
          client.setName(name);
@@ -129,42 +112,42 @@ void SaveFile::saveClientsToFile(std::list<Client> clients){
 
 
 void SaveFile::saveToFile(){
-//    Client* client = new Client();
+////    Client* client = new Client();
 
 
 
-    QFile inFile("G://input.txt");
+//    QFile inFile("G://input.txt");
 
 
 
-    qDebug()<<"1";
-        inFile.open(QIODevice::ReadOnly | QIODevice::Text);
-        while(!inFile.atEnd())
-        {
-            QString line = inFile.readLine();
-            qDebug()<<line;
-        }
+//    qDebug()<<"1";
+//        inFile.open(QIODevice::ReadOnly | QIODevice::Text);
+//        while(!inFile.atEnd())
+//        {
+//            QString line = inFile.readLine();
+//            qDebug()<<line;
+//        }
 
-        QByteArray inputData="ciiiiiiiiiiiiiiiiiiiiiiiiiii";
-//                = inFile.readAll();
-//        qDebug()<<inputData;
-        QFile caFile("G://output.txt");
-        caFile.open(QIODevice::WriteOnly | QIODevice::Text);
+//        QByteArray inputData="ciiiiiiiiiiiiiiiiiiiiiiiiiii";
+////                = inFile.readAll();
+////        qDebug()<<inputData;
+//        QFile caFile("G://output.txt");
+//        caFile.open(QIODevice::WriteOnly | QIODevice::Text);
 
-        if(!caFile.isOpen()){
-            qDebug() << "- Error, unable to open" << "outputFilename" << "for output";
-        }
-        QTextStream outStream(&caFile);
-        outStream << inputData;
-        qDebug()<<"4";
-        caFile.close();
+//        if(!caFile.isOpen()){
+//            qDebug() << "- Error, unable to open" << "outputFilename" << "for output";
+//        }
+//        QTextStream outStream(&caFile);
+//        outStream << inputData;
+//        qDebug()<<"4";
+//        caFile.close();
 
 
-    //    std::list<Client>::iterator i;
-    ////    fstream binary_file("c:\\test.dat",ios::out|ios::binary|ios::app);
-    //    std::ofstream myFile ("data.bin", std::ios::in | std::ios::binary);
-    //    for ( i=lista.begin(); i!=lista.end();++i)
-    //    {
-    //        myFile.write(i->name, i->name.length());
-    //    }
+//    //    std::list<Client>::iterator i;
+//    ////    fstream binary_file("c:\\test.dat",ios::out|ios::binary|ios::app);
+//    //    std::ofstream myFile ("data.bin", std::ios::in | std::ios::binary);
+//    //    for ( i=lista.begin(); i!=lista.end();++i)
+//    //    {
+//    //        myFile.write(i->name, i->name.length());
+//    //    }
 }

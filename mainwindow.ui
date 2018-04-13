@@ -48,7 +48,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="mainTab">
      <attribute name="title">
@@ -172,6 +172,11 @@
       <column>
        <property name="text">
         <string>Ilość</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Jednostka</string>
        </property>
       </column>
       <column>

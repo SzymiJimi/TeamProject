@@ -29,12 +29,20 @@ SOURCES += \
     dialog/addclient.cpp \
     model/client.cpp \
     services/savefile.cpp \
+    model/product.cpp \
+    model/invoice.cpp \
+    model/sale.cpp \
+    model/productsales.cpp
 
 HEADERS += \
         mainwindow.h \
     dialog/addclient.h \
     model/client.h \
     services/savefile.h \
+    model/product.h \
+    model/invoice.h \
+    model/sale.h \
+    model/productsales.h
 
 FORMS += \
         mainwindow.ui \

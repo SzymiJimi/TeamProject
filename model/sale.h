@@ -3,11 +3,11 @@
 
 #include <QObject>
 
-class Sale : public QObject
+class Sale
 {
-    Q_OBJECT
+
 public:
-    explicit Sale(QObject *parent = nullptr);
+    Sale();
     int getId();
     QString getName();
     QString getQuantity();
@@ -19,6 +19,9 @@ public:
     void setQuantity(QString quantity);
     void setUnit(QString unit);
     void setPrice(QString price);
+
+    std::list<Sale> loadFromFile();
+    void saveToFile(std::list<Sale> clients);
 
 signals:
 

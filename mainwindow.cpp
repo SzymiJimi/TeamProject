@@ -5,6 +5,7 @@
 #include "model/client.h"
 #include <QDebug>
 #include "services/savefile.h"
+#include "model/product.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     addClientsFromFileToTable();
+    Product::addFromFileToTable(ui);
 }
 
 MainWindow::~MainWindow()

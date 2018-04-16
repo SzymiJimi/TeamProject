@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include <QObject>
+#include <list>
 
 class Client
 {
@@ -38,6 +39,9 @@ public:
     QString getHouseNr();
     QString getPostalCode();
     QString getCity();
+
+    std::list<Client> loadClientsFromFile();
+    void saveClientsToFile(std::list<Client> clients);
 
 };
 

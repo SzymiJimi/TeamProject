@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QFileInfo>
 #include <list>
+#include <QTextCodec>
 
 SaveFile::SaveFile(QObject *parent) : QObject(parent)
 {
@@ -24,47 +25,50 @@ std::list<Client> SaveFile::loadClientsFromFile()
         qDebug()<<"File not exist...";
     }
 
-     QFile inFile("G://clients.txt");
-     inFile.open(QIODevice::ReadOnly | QIODevice::Text);
+     QFile in("G://clients.txt");
+     in.open(QIODevice::ReadOnly | QIODevice::Text);
+     QTextStream inFile(&in);
+     inFile.setCodec(QTextCodec::codecForName("UTF-8"));
+
      std::list<Client> clients;
      Client client;
 
      while(!inFile.atEnd())
      {
          int position;
-         QByteArray id=inFile.readLine();
+         QString id=inFile.readLine();
          position=id.lastIndexOf(QChar('\n'));
          id=id.left(position);
 
-         QByteArray name=inFile.readLine();
+         QString name=inFile.readLine();
          position=name.lastIndexOf(QChar('\n'));
          name=name.left(position);
 
-         QByteArray surname=inFile.readLine();
+         QString surname=inFile.readLine();
          position=surname.lastIndexOf(QChar('\n'));
          surname=surname.left(position);
 
-         QByteArray pesel=inFile.readLine();
+         QString pesel=inFile.readLine();
          position=pesel.lastIndexOf(QChar('\n'));
          pesel=pesel.left(position);
 
-         QByteArray nip=inFile.readLine();
+         QString nip=inFile.readLine();
          position=nip.lastIndexOf(QChar('\n'));
          nip=nip.left(position);
 
-         QByteArray street=inFile.readLine();
+         QString street=inFile.readLine();
          position=street.lastIndexOf(QChar('\n'));
          street=street.left(position);
 
-         QByteArray houseNr=inFile.readLine();
+         QString houseNr=inFile.readLine();
          position=houseNr.lastIndexOf(QChar('\n'));
          houseNr=houseNr.left(position);
 
-         QByteArray postalCode=inFile.readLine();
+         QString postalCode=inFile.readLine();
          position=postalCode.lastIndexOf(QChar('\n'));
          postalCode=postalCode.left(position);
 
-         QByteArray city=inFile.readLine();
+         QString city=inFile.readLine();
          position=city.lastIndexOf(QChar('\n'));
 
          if(!(position==-1&&city.size()>0)){
@@ -82,7 +86,7 @@ std::list<Client> SaveFile::loadClientsFromFile()
          client.setCity(city);
          clients.push_back(client);
      }
-     inFile.close();
+     in.close();
      return clients;
 }
 
@@ -96,15 +100,15 @@ void SaveFile::saveClientsToFile(std::list<Client> clients){
     QTextStream outStream(&caFile);
     std::list<Client>::iterator i;
     for(i=clients.begin(); i!=clients.end();i++){
-        outStream <<i->getId()<<endl;
-        outStream <<i->getName()<<endl;
-        outStream <<i->getSurname()<<endl;
-        outStream <<i->getPesel()<<endl;
-        outStream <<i->getNip()<<endl;
-        outStream <<i->getStreet()<<endl;
-        outStream <<i->getHouseNr()<<endl;
-        outStream <<i->getPostalCode()<<endl;
-        outStream <<i->getCity()<<endl;
+        outStream <<QString::number(i->getId()).toUtf8()<<endl;
+        outStream <<i->getName().toUtf8()<<endl;
+        outStream <<i->getSurname().toUtf8()<<endl;
+        outStream <<i->getPesel().toUtf8()<<endl;
+        outStream <<i->getNip().toUtf8()<<endl;
+        outStream <<i->getStreet().toUtf8()<<endl;
+        outStream <<i->getHouseNr().toUtf8()<<endl;
+        outStream <<i->getPostalCode().toUtf8()<<endl;
+        outStream <<i->getCity().toUtf8()<<endl;
     }
 
     caFile.close();

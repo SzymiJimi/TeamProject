@@ -2,13 +2,12 @@
 #define PRODUCTSALES_H
 
 #include <QObject>
+#include <list>
 
-class ProductSales : public QObject
+class ProductSales
 {
-    Q_OBJECT
 public:
-    explicit ProductSales(QObject *parent = nullptr);
-
+    ProductSales();
     int getProductSaleId();
     int getProductId();
     int getSaleId();
@@ -16,6 +15,9 @@ public:
     void setProductSaleId(int productSaleId);
     void setProductId(int productId);
     void setSaleId(int saleId);
+
+    std::list<ProductSales> loadFromFile();
+    void saveToFile(std::list<ProductSales> productsSales);
 
 signals:
 

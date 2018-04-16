@@ -9,6 +9,8 @@
 #include <QDebug>
 #include "services/savefile.h"
 #include <list>
+#include "model/product.h"
+
 
 
 

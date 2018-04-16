@@ -48,7 +48,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="mainTab">
      <attribute name="title">
@@ -332,7 +332,7 @@
      <attribute name="title">
       <string>Magazyn</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="productsTable">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -352,6 +352,11 @@
       </attribute>
       <column>
        <property name="text">
+        <string>Kod produktu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
         <string>Nazwa produktu</string>
        </property>
       </column>
@@ -363,6 +368,11 @@
       <column>
        <property name="text">
         <string>Ilość</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Jednostka</string>
        </property>
       </column>
       <column>

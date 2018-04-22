@@ -15,7 +15,7 @@ class FindDialog : public QDialog
 public:
     explicit FindDialog(QWidget *parent = 0);
     Product findProductById();
-    void getProductId();
+    int getProductId();
     ~FindDialog();
 
 private slots:

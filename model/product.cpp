@@ -169,16 +169,18 @@ void Product::saveToFile(std::list<Product> products){
         qDebug() << "- Error, unable to open" << "outputFilename" << "for output";
     }
     QTextStream outStream(&caFile);
+    outStream.setCodec(QTextCodec::codecForName("UTF-8"));
     std::list<Product>::iterator i;
     for(i=products.begin(); i!=products.end();i++){
-        outStream <<QString::number(i->getId()).toUtf8() <<endl;
-        outStream <<i->getBrand().toUtf8()<<endl;
-        outStream <<QString::number(i->getQuantity()).toUtf8()<<endl;
-        outStream <<i->getUnit().toUtf8()<<endl;
-        outStream <<QString::number(i->getPrice()).toUtf8()<<endl;
-        outStream <<i->getVAT().toUtf8()<<endl;
-        outStream <<i->getExpirationDate().toUtf8()<<endl;
-        outStream <<i->getAddDate().toUtf8()<<endl;
+        outStream <<QString::number(i->getId())<<endl;
+        outStream <<i->getName()<<endl;
+        outStream <<i->getBrand()<<endl;
+        outStream <<QString::number(i->getQuantity())<<endl;
+        outStream <<i->getUnit()<<endl;
+        outStream <<QString::number(i->getPrice())<<endl;
+        outStream <<i->getVAT()<<endl;
+        outStream <<i->getExpirationDate()<<endl;
+        outStream <<i->getAddDate()<<endl;
     }
 
     caFile.close();
@@ -211,6 +213,31 @@ void Product::addFromFileToTable(Ui::MainWindow * window){
             window->productsTable->setItem(window->productsTable->rowCount()-1, 7, new QTableWidgetItem(i->getExpirationDate()));
             window->productsTable->setItem(window->productsTable->rowCount()-1, 8, new QTableWidgetItem(i->getAddDate()));
         }
+
+}
+
+int prodId;
+
+bool productIdIsEqual(Product product){
+    return ((product.getId()==prodId));
+}
+
+Product Product::findProductById(int productId){
+    prodId=productId;
+    std::list<Product>::iterator findIter = std::find_if(products.begin(), products.end(), productIdIsEqual);
+    qDebug()<<"Znaleziony produkt w findProductById: "<<(&findIter);
+    if(findIter!=products.end()){
+
+        Product &product = *findIter;
+        return product;
+    }else{
+            Product prod;
+            prod.setId(-1);
+            return prod;
+
+
+    }
+
 
 }
 

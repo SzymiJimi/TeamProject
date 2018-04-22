@@ -32,7 +32,11 @@ public:
     std::list<Product> loadFromFile();
     void saveToFile(std::list<Product> clients);
     static void addFromFileToTable(Ui::MainWindow * window);
+    Product findProductById(int productId);
+
+
     static std::list<Product> products;
+
 signals:
 
 public slots:

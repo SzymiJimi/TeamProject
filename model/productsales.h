@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <list>
+#include <mainwindow.h>
 
 class ProductSales
 {
@@ -16,8 +17,11 @@ public:
     void setProductId(int productId);
     void setSaleId(int saleId);
 
-    std::list<ProductSales> loadFromFile();
-    void saveToFile(std::list<ProductSales> productsSales);
+    void loadFromFile();
+    void saveToFile();
+//    static void addFromFileToTable(Ui::MainWindow * window);
+
+    static std::list<ProductSales> productsSales;
 
 signals:
 

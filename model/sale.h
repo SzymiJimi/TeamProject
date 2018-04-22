@@ -2,6 +2,9 @@
 #define SALE_H
 
 #include <QObject>
+#include <mainwindow.h>
+
+
 
 class Sale
 {
@@ -9,19 +12,21 @@ class Sale
 public:
     Sale();
     int getId();
-    QString getName();
-    QString getQuantity();
-    QString getUnit();
-    QString getPrice();
+    QString getShippingDate();
+    QString getShippingPrice();
+    QString getProductsQuantity();
 
     void setId(int id);
-    void setName(QString name);
-    void setQuantity(QString quantity);
-    void setUnit(QString unit);
-    void setPrice(QString price);
+    void setShippingDate(QString shippingDate);
+    void setShippingPrice(QString shippingPrice);
+    void setProductsQuantity(QString productsQuantity);
 
     std::list<Sale> loadFromFile();
     void saveToFile(std::list<Sale> clients);
+    static void addFromFileToTable(Ui::MainWindow * window);
+    static void addToSaleTable(Ui::MainWindow *window, Sale sale);
+
+    static std::list<Sale> sales;
 
 signals:
 
@@ -30,10 +35,9 @@ public slots:
 
 private:
     int id;
-    QString name;
-    QString quantity;
-    QString unit;
-    QString price;
+    QString shippingDate;
+    QString shippingPrice;
+    QString productsQuantity;
 
 
 };

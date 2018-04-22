@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QTextCodec>
 
+std::list<Sale> Sale::sales;
 
 Sale::Sale(){
 
@@ -16,20 +17,16 @@ int Sale::getId(){
     return this->id;
 }
 
-QString Sale::getName(){
-    return this->name;
+QString Sale::getShippingDate(){
+    return this->shippingDate;
 }
 
-QString Sale::getQuantity(){
-    return this->quantity;
+QString Sale::getShippingPrice(){
+    return this->shippingPrice;
 }
 
-QString Sale::getUnit(){
-    return this->unit;
-}
-
-QString Sale::getPrice(){
-    return this->price;
+QString Sale::getProductsQuantity(){
+    return this->productsQuantity;
 }
 
 
@@ -37,21 +34,18 @@ void Sale::setId(int id){
     this->id=id;
 }
 
-void Sale::setName(QString name){
-    this->name=name;
+void Sale::setShippingDate(QString shippingDate){
+    this->shippingDate=shippingDate;
 }
 
-void Sale::setQuantity(QString quantity){
-    this->quantity=quantity;
+void Sale::setShippingPrice(QString shippingPrice){
+    this->shippingPrice=shippingPrice;
 }
 
-void Sale::setUnit(QString unit){
-    this->unit=unit;
+void Sale::setProductsQuantity(QString productsQuantity){
+    this->productsQuantity=productsQuantity;
 }
 
-void Sale::setPrice(QString price){
-    this->price=price;
-}
 
 std::list<Sale> Sale::loadFromFile(){
     QFileInfo check_file("G://sales.txt");
@@ -77,31 +71,26 @@ std::list<Sale> Sale::loadFromFile(){
          position=idFile.lastIndexOf(QChar('\n'));
          idFile=idFile.left(position);
 
-         QString nameFile=inFile.readLine();
-         position=nameFile.lastIndexOf(QChar('\n'));
-         nameFile=nameFile.left(position);
+         QString shippingDateFile=inFile.readLine();
+         position=shippingDateFile.lastIndexOf(QChar('\n'));
+         shippingDateFile=shippingDateFile.left(position);
+
+         QString shippingPriceFile=inFile.readLine();
+         position=shippingPriceFile.lastIndexOf(QChar('\n'));
+         shippingPriceFile=shippingPriceFile.left(position);
+
 
          QString quantityFile=inFile.readLine();
          position=quantityFile.lastIndexOf(QChar('\n'));
-         quantityFile=quantityFile.left(position);
 
-         QString unitFile=inFile.readLine();
-         position=unitFile.lastIndexOf(QChar('\n'));
-         unitFile=unitFile.left(position);
-
-
-         QString priceFile=inFile.readLine();
-         position=priceFile.lastIndexOf(QChar('\n'));
-
-         if(!(position==-1&&priceFile.size()>0)){
-            priceFile=priceFile.left(position);
+         if(!(position==-1&&quantityFile.size()>0)){
+            quantityFile=quantityFile.left(position);
          }
 
          sale.setId(idFile.toInt());
-         sale.setName(nameFile);
-         sale.setQuantity(quantityFile);
-         sale.setUnit(unitFile);
-         sale.setPrice(priceFile);
+         sale.setShippingDate(shippingDateFile);
+         sale.setShippingPrice(shippingPriceFile);
+         sale.setProductsQuantity(quantityFile);
 
          sales.push_back(sale);
      }
@@ -118,14 +107,41 @@ void Sale::saveToFile(std::list<Sale> sales){
         qDebug() << "- Error, unable to open" << "outputFilename" << "for output";
     }
     QTextStream outStream(&caFile);
+    outStream.setCodec(QTextCodec::codecForName("UTF-8"));
     std::list<Sale>::iterator i;
     for(i=sales.begin(); i!=sales.end();i++){
-        outStream <<QString::number(i->getId()).toUtf8()<<endl;
-        outStream <<i->getName().toUtf8()<<endl;
-        outStream <<i->getQuantity().toUtf8()<<endl;
-        outStream <<i->getUnit().toUtf8()<<endl;
-        outStream <<i->getPrice().toUtf8()<<endl;
+        outStream <<QString::number(i->getId())<<endl;
+        outStream <<i->getShippingDate()<<endl;
+        outStream <<i->getShippingPrice()<<endl;
+        outStream <<i->getProductsQuantity()<<endl;
     }
 
     caFile.close();
+}
+
+void Sale::addToSaleTable(Ui::MainWindow *window, Sale sale)
+{
+    QString idString;
+    idString = QString::number(sale.getId());
+    window->shoppingTable->insertRow(window->shoppingTable->rowCount());
+    window->shoppingTable->setItem(window->shoppingTable->rowCount()-1, 0, new QTableWidgetItem(idString));
+    window->shoppingTable->setItem(window->shoppingTable->rowCount()-1, 1, new QTableWidgetItem(sale.getShippingDate()));
+    window->shoppingTable->setItem(window->shoppingTable->rowCount()-1, 2, new QTableWidgetItem(sale.getShippingPrice()));
+    window->shoppingTable->setItem(window->shoppingTable->rowCount()-1, 3, new QTableWidgetItem(sale.getProductsQuantity()));
+
+}
+
+void Sale::addFromFileToTable(Ui::MainWindow * window){
+
+        Sale sale;
+        sales = sale.loadFromFile();
+        std::list<Sale>::iterator i;
+        qDebug()<<"Jestem w addToTable(product), rozmiar listy: "<<sales.size();
+
+
+        for(i=sales.begin(); i!=sales.end();i++){
+            qDebug()<<"W petli";
+            addToSaleTable( window,  *i);
+        }
+
 }

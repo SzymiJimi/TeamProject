@@ -45,6 +45,9 @@ private slots:
     void on_pushButton_6_clicked();
 
 
+    void on_addPurchasedItem_clicked();
+
+    void on_finishShopping_clicked();
 
 private:
     std::list<Client> clients;

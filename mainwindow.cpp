@@ -6,7 +6,11 @@
 #include <QDebug>
 #include "services/savefile.h"
 #include "model/product.h"
+#include "model/sale.h"
 #include "dialog/finddialog.h"
+#include <iomanip>
+#include "services/shopping.h"
+#include "model/productsales.h"
 
 using namespace std;
 
@@ -17,12 +21,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     addClientsFromFileToTable();
     Product::addFromFileToTable(ui);
+    Sale::addFromFileToTable(ui);
+    ProductSales productSales;
+    productSales.loadFromFile();
 }
 
 MainWindow::~MainWindow()
 {
     SaveFile save;
     save.saveClientsToFile(this->clients);
+    Product product;
+    product.saveToFile(Product::products);
+    Sale sale;
+    sale.saveToFile(Sale::sales);
+    ProductSales productSales;
+    productSales.saveToFile();
     delete ui;
 }
 
@@ -114,4 +127,49 @@ void MainWindow::on_pushButton_6_clicked()
 
 
     }
+}
+
+void MainWindow::on_addPurchasedItem_clicked()
+{
+    Product tmpProd;
+    QString productCodeString = ui->productCodeField->text();
+    int productCode=productCodeString.toInt();
+    Product product= tmpProd.findProductById(productCode);
+    if(product.getId()>0)
+    {
+        double amount = ui->productsAmount->value();
+        if(amount>0){
+        double cost=(round((amount * product.getPrice())*100))/100;
+        QString costString = QString::number(cost);
+        QString priceString = QString::number(product.getPrice());
+        if(amount>product.getQuantity()){
+            ui->returnMessage->setText("Za duża ilość(max:"+QString::number(product.getQuantity())+")");
+        }else{
+        double purchasePrice= ui->purchasePrice->text().toDouble();
+        qDebug()<<"Aktualna cena zakupów:"<<purchasePrice;
+        purchasePrice=purchasePrice+cost;
+        purchasePrice = (round(purchasePrice*100))/100;
+        ui->purchasePrice->setText(QString::number(purchasePrice));
+        ui->returnMessage->setText("Znaleziono produkt!");
+        ui->purchasedProductTable->insertRow(ui->purchasedProductTable->rowCount());
+        ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 0, new QTableWidgetItem(product.getName()));
+        ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 1, new QTableWidgetItem(priceString));
+        ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 2, new QTableWidgetItem(QString::number(amount)));
+        ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 3, new QTableWidgetItem(product.getUnit()));
+        ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 4, new QTableWidgetItem(costString));
+        ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 5, new QTableWidgetItem(QString::number(productCode)));
+          }
+        }else{
+            ui->returnMessage->setText("Nie podałeś ilości...");
+        }
+
+    }else{
+        ui->returnMessage->setText("Nie znaleziono produktu...");
+    }
+}
+
+void MainWindow::on_finishShopping_clicked()
+{
+     Shopping shopping;
+     shopping.buyProducts(ui);
 }

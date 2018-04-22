@@ -7,6 +7,8 @@
 #include <QFileInfo>
 #include <QTextCodec>
 
+std::list<ProductSales> ProductSales::productsSales;
+
 ProductSales::ProductSales(){
 
 }
@@ -36,7 +38,7 @@ void ProductSales::setSaleId(int saleId){
     this->saleId=saleId;
 }
 
-std::list<ProductSales> ProductSales::loadFromFile(){
+void ProductSales::loadFromFile(){
     QFileInfo check_file("G://productSales.txt");
     if(check_file.exists()&&check_file.isFile())
     {
@@ -50,7 +52,6 @@ std::list<ProductSales> ProductSales::loadFromFile(){
      in.open(QIODevice::ReadOnly | QIODevice::Text);
      QTextStream inFile(&in);
      inFile.setCodec(QTextCodec::codecForName("UTF-8"));
-     std::list<ProductSales> productsSales;
      ProductSales productSales;
 
      while(!inFile.atEnd())
@@ -75,14 +76,12 @@ std::list<ProductSales> ProductSales::loadFromFile(){
          productSales.setProductId(productIdFile.toInt());
          productSales.setSaleId(saleIdFile.toInt());
 
-
          productsSales.push_back(productSales);
      }
      in.close();
-     return productsSales;
 }
 
-void ProductSales::saveToFile(std::list<ProductSales> productsSales){
+void ProductSales::saveToFile(){
     QFile caFile("G://productSales.txt");
     caFile.open(QIODevice::WriteOnly | QIODevice::Text);
 
@@ -90,12 +89,16 @@ void ProductSales::saveToFile(std::list<ProductSales> productsSales){
         qDebug() << "- Error, unable to open" << "outputFilename" << "for output";
     }
     QTextStream outStream(&caFile);
+    outStream.setCodec(QTextCodec::codecForName("UTF-8"));
+
     std::list<ProductSales>::iterator i;
     for(i=productsSales.begin(); i!=productsSales.end();i++){
-        outStream <<QString::number(i->getProductSaleId()).toUtf8()<<endl;
-        outStream <<QString::number(i->getProductId()).toUtf8()<<endl;
-        outStream <<QString::number(i->getSaleId()).toUtf8()<<endl;
+        outStream <<QString::number(i->getProductSaleId())<<endl;
+        outStream <<QString::number(i->getProductId())<<endl;
+        outStream <<QString::number(i->getSaleId())<<endl;
     }
 
     caFile.close();
 }
+
+

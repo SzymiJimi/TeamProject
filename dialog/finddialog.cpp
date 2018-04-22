@@ -4,7 +4,6 @@
 #include <list>
 #include <QDebug>
 
-int prodId;
 
 FindDialog::FindDialog(QWidget *parent) :
     QDialog(parent),
@@ -18,31 +17,19 @@ FindDialog::~FindDialog()
     delete ui;
 }
 
-void FindDialog::getProductId(){
+int FindDialog::getProductId(){
 
     QString idString = ui->productId->text();
-    prodId=idString.toInt();
+    int prodId=idString.toInt();
+    return prodId;
 }
 
-bool productIdIsEqual(Product product){
-    return ((product.getId()==prodId));
-}
-
-Product FindDialog::findProductById(){
-    std::list<Product> productList= Product::products;
-    std::list<Product>::iterator findIter = std::find_if(Product::products.begin(), Product::products.end(), productIdIsEqual);
-    Product &product = *findIter;
-//        Product product;
-    return product;
-
-//    return product;
-}
 
 void FindDialog::on_findButton_clicked()
 {
-    getProductId();
-    Product product= findProductById();
-    QString idString = QString::number(product.getId());
+    int productId = getProductId();
+    Product tmp;
+    Product product= tmp.findProductById(productId);
     QString quantityString = QString::number(product.getQuantity());
     QString priceString = QString::number(product.getPrice());
 

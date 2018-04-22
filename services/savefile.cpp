@@ -98,17 +98,18 @@ void SaveFile::saveClientsToFile(std::list<Client> clients){
         qDebug() << "- Error, unable to open" << "outputFilename" << "for output";
     }
     QTextStream outStream(&caFile);
+    outStream.setCodec(QTextCodec::codecForName("UTF-8"));
     std::list<Client>::iterator i;
     for(i=clients.begin(); i!=clients.end();i++){
-        outStream <<QString::number(i->getId()).toUtf8()<<endl;
-        outStream <<i->getName().toUtf8()<<endl;
-        outStream <<i->getSurname().toUtf8()<<endl;
-        outStream <<i->getPesel().toUtf8()<<endl;
-        outStream <<i->getNip().toUtf8()<<endl;
-        outStream <<i->getStreet().toUtf8()<<endl;
-        outStream <<i->getHouseNr().toUtf8()<<endl;
-        outStream <<i->getPostalCode().toUtf8()<<endl;
-        outStream <<i->getCity().toUtf8()<<endl;
+        outStream <<i->getId()<<endl;
+        outStream <<i->getName()<<endl;
+        outStream <<i->getSurname()<<endl;
+        outStream <<i->getPesel()<<endl;
+        outStream <<i->getNip()<<endl;
+        outStream <<i->getStreet()<<endl;
+        outStream <<i->getHouseNr()<<endl;
+        outStream <<i->getPostalCode()<<endl;
+        outStream <<i->getCity()<<endl;
     }
 
     caFile.close();

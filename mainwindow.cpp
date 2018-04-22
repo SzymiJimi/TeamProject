@@ -6,6 +6,7 @@
 #include <QDebug>
 #include "services/savefile.h"
 #include "model/product.h"
+#include "dialog/finddialog.h"
 
 using namespace std;
 
@@ -63,7 +64,7 @@ void MainWindow::addClientsFromFileToTable(){
 //    ui->ClientsTable->insertRow(ui->ClientsTable->rowCount());
     SaveFile saveFile;
 
-    this->clients= saveFile.loadClientsFromFile();
+    MainWindow::clients= saveFile.loadClientsFromFile();
     list<Client>::iterator i;
     qDebug()<<"Jestem w addClientsFromFileToTable, rozmiar listy: "<<this->clients.size();
      QString idString;
@@ -101,4 +102,16 @@ void MainWindow::addClientToTable(Client* client){
    ui->ClientsTable->setItem(ui->ClientsTable->rowCount()-1, 6, new QTableWidgetItem(client->getHouseNr()));
    ui->ClientsTable->setItem(ui->ClientsTable->rowCount()-1, 7, new QTableWidgetItem(client->getPostalCode()));
    ui->ClientsTable->setItem(ui->ClientsTable->rowCount()-1, 8, new QTableWidgetItem(client->getCity()));
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    FindDialog findProduct;
+    findProduct.setModal(true);
+    if(findProduct.exec()==QDialog::Accepted){
+        qDebug()<<"Nacisnoles ok!";
+//        int* id = findProduct.getProductId();
+
+
+    }
 }

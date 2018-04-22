@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QFileInfo>
-
+#include <QTextCodec>
 
 
 Sale::Sale(){
@@ -63,32 +63,34 @@ std::list<Sale> Sale::loadFromFile(){
         qDebug()<<"File not exist...";
     }
 
-     QFile inFile("G://sales.txt");
-     inFile.open(QIODevice::ReadOnly | QIODevice::Text);
+     QFile in("G://sales.txt");
+     in.open(QIODevice::ReadOnly | QIODevice::Text);
+     QTextStream inFile(&in);
+     inFile.setCodec(QTextCodec::codecForName("UTF-8"));
      std::list<Sale> sales;
      Sale sale;
 
      while(!inFile.atEnd())
      {
          int position;
-         QByteArray idFile=inFile.readLine();
+         QString idFile=inFile.readLine();
          position=idFile.lastIndexOf(QChar('\n'));
          idFile=idFile.left(position);
 
-         QByteArray nameFile=inFile.readLine();
+         QString nameFile=inFile.readLine();
          position=nameFile.lastIndexOf(QChar('\n'));
          nameFile=nameFile.left(position);
 
-         QByteArray quantityFile=inFile.readLine();
+         QString quantityFile=inFile.readLine();
          position=quantityFile.lastIndexOf(QChar('\n'));
          quantityFile=quantityFile.left(position);
 
-         QByteArray unitFile=inFile.readLine();
+         QString unitFile=inFile.readLine();
          position=unitFile.lastIndexOf(QChar('\n'));
          unitFile=unitFile.left(position);
 
 
-         QByteArray priceFile=inFile.readLine();
+         QString priceFile=inFile.readLine();
          position=priceFile.lastIndexOf(QChar('\n'));
 
          if(!(position==-1&&priceFile.size()>0)){
@@ -103,7 +105,7 @@ std::list<Sale> Sale::loadFromFile(){
 
          sales.push_back(sale);
      }
-     inFile.close();
+     in.close();
      return sales;
 }
 
@@ -118,11 +120,11 @@ void Sale::saveToFile(std::list<Sale> sales){
     QTextStream outStream(&caFile);
     std::list<Sale>::iterator i;
     for(i=sales.begin(); i!=sales.end();i++){
-        outStream <<i->getId()<<endl;
-        outStream <<i->getName()<<endl;
-        outStream <<i->getQuantity()<<endl;
-        outStream <<i->getUnit()<<endl;
-        outStream <<i->getPrice()<<endl;
+        outStream <<QString::number(i->getId()).toUtf8()<<endl;
+        outStream <<i->getName().toUtf8()<<endl;
+        outStream <<i->getQuantity().toUtf8()<<endl;
+        outStream <<i->getUnit().toUtf8()<<endl;
+        outStream <<i->getPrice().toUtf8()<<endl;
     }
 
     caFile.close();

@@ -32,11 +32,13 @@ public:
     std::list<Product> loadFromFile();
     void saveToFile(std::list<Product> clients);
     static void addFromFileToTable(Ui::MainWindow * window);
+    static std::list<Product> products;
 signals:
 
 public slots:
 
 private:
+
     int id;
     QString name;
     QString brand;

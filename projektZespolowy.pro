@@ -32,7 +32,8 @@ SOURCES += \
     model/product.cpp \
     model/invoice.cpp \
     model/sale.cpp \
-    model/productsales.cpp
+    model/productsales.cpp \
+    dialog/finddialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,8 +43,10 @@ HEADERS += \
     model/product.h \
     model/invoice.h \
     model/sale.h \
-    model/productsales.h
+    model/productsales.h \
+    dialog/finddialog.h
 
 FORMS += \
         mainwindow.ui \
-    dialog/addclient.ui
+    dialog/addclient.ui \
+    dialog/finddialog.ui

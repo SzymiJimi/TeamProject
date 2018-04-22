@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QFileInfo>
-
+#include <QTextCodec>
 
 ProductSales::ProductSales(){
 
@@ -46,23 +46,25 @@ std::list<ProductSales> ProductSales::loadFromFile(){
         qDebug()<<"File not exist...";
     }
 
-     QFile inFile("G://productSales.txt");
-     inFile.open(QIODevice::ReadOnly | QIODevice::Text);
+     QFile in("G://productSales.txt");
+     in.open(QIODevice::ReadOnly | QIODevice::Text);
+     QTextStream inFile(&in);
+     inFile.setCodec(QTextCodec::codecForName("UTF-8"));
      std::list<ProductSales> productsSales;
      ProductSales productSales;
 
      while(!inFile.atEnd())
      {
          int position;
-         QByteArray productSaleIdFile=inFile.readLine();
+         QString productSaleIdFile=inFile.readLine();
          position=productSaleIdFile.lastIndexOf(QChar('\n'));
          productSaleIdFile=productSaleIdFile.left(position);
 
-         QByteArray productIdFile=inFile.readLine();
+         QString productIdFile=inFile.readLine();
          position=productIdFile.lastIndexOf(QChar('\n'));
          productIdFile=productIdFile.left(position);
 
-         QByteArray saleIdFile=inFile.readLine();
+         QString saleIdFile=inFile.readLine();
          position=saleIdFile.lastIndexOf(QChar('\n'));
 
          if(!(position==-1&&saleIdFile.size()>0)){
@@ -76,7 +78,7 @@ std::list<ProductSales> ProductSales::loadFromFile(){
 
          productsSales.push_back(productSales);
      }
-     inFile.close();
+     in.close();
      return productsSales;
 }
 
@@ -90,9 +92,9 @@ void ProductSales::saveToFile(std::list<ProductSales> productsSales){
     QTextStream outStream(&caFile);
     std::list<ProductSales>::iterator i;
     for(i=productsSales.begin(); i!=productsSales.end();i++){
-        outStream <<i->getProductSaleId()<<endl;
-        outStream <<i->getProductId()<<endl;
-        outStream <<i->getSaleId()<<endl;
+        outStream <<QString::number(i->getProductSaleId()).toUtf8()<<endl;
+        outStream <<QString::number(i->getProductId()).toUtf8()<<endl;
+        outStream <<QString::number(i->getSaleId()).toUtf8()<<endl;
     }
 
     caFile.close();

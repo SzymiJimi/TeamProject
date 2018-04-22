@@ -42,6 +42,10 @@ private slots:
 
     void addClientsFromFileToTable();
 
+    void on_pushButton_6_clicked();
+
+
+
 private:
     std::list<Client> clients;
     Ui::MainWindow *ui;
@@ -53,3 +57,4 @@ public:
 
 
 #endif // MAINWINDOW_H
+

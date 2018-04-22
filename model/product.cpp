@@ -8,6 +8,7 @@
 #include <QFileInfo>
 #include <QTextCodec>
 
+std::list<Product> Product::products;
 
 Product::Product(){
 
@@ -186,7 +187,7 @@ void Product::saveToFile(std::list<Product> products){
 void Product::addFromFileToTable(Ui::MainWindow * window){
 
         Product product;
-        std::list<Product> products = product.loadFromFile();
+        products = product.loadFromFile();
         std::list<Product>::iterator i;
         qDebug()<<"Jestem w addToTable(product), rozmiar listy: "<<products.size();
          QString idString;
@@ -212,6 +213,8 @@ void Product::addFromFileToTable(Ui::MainWindow * window){
         }
 
 }
+
+
 
 
 

@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QFileInfo>
+#include <QTextCodec>
 
 
 Invoice::Invoice(){
@@ -62,31 +63,33 @@ std::list<Invoice> Invoice::loadFromFile(){
         qDebug()<<"File not exist...";
     }
 
-     QFile inFile("G://invoices.txt");
-     inFile.open(QIODevice::ReadOnly | QIODevice::Text);
+     QFile in("G://invoices.txt");
+     in.open(QIODevice::ReadOnly | QIODevice::Text);
+     QTextStream inFile(&in);
+     inFile.setCodec(QTextCodec::codecForName("UTF-8"));
      std::list<Invoice> invoices;
      Invoice invoice;
 
      while(!inFile.atEnd())
      {
          int position;
-         QByteArray idFile=inFile.readLine();
+         QString idFile=inFile.readLine();
          position=idFile.lastIndexOf(QChar('\n'));
          idFile=idFile.left(position);
 
-         QByteArray purchaseNrFile=inFile.readLine();
+         QString purchaseNrFile=inFile.readLine();
          position=purchaseNrFile.lastIndexOf(QChar('\n'));
          purchaseNrFile=purchaseNrFile.left(position);
 
-         QByteArray purchaseDateFile=inFile.readLine();
+         QString purchaseDateFile=inFile.readLine();
          position=purchaseDateFile.lastIndexOf(QChar('\n'));
          purchaseDateFile=purchaseDateFile.left(position);
 
-         QByteArray purchaseValueFile=inFile.readLine();
+         QString purchaseValueFile=inFile.readLine();
          position=purchaseValueFile.lastIndexOf(QChar('\n'));
          purchaseValueFile=purchaseValueFile.left(position);
 
-         QByteArray productsAmountFile=inFile.readLine();
+         QString productsAmountFile=inFile.readLine();
          position=productsAmountFile.lastIndexOf(QChar('\n'));
 
          if(!(position==-1&&productsAmountFile.size()>0)){
@@ -101,7 +104,7 @@ std::list<Invoice> Invoice::loadFromFile(){
 
          invoices.push_back(invoice);
      }
-     inFile.close();
+     in.close();
      return invoices;
 }
 
@@ -116,11 +119,11 @@ void Invoice::saveToFile(std::list<Invoice> invoices){
     QTextStream outStream(&caFile);
     std::list<Invoice>::iterator i;
     for(i=invoices.begin(); i!=invoices.end();i++){
-        outStream <<i->getId()<<endl;
-        outStream <<i->getPurchaseNr()<<endl;
-        outStream <<i->getPurchaseDate()<<endl;
-        outStream <<i->getPurchaseValue()<<endl;
-        outStream <<i->getProductsAmount()<<endl;
+        outStream <<QString::number(i->getId()).toUtf8()<<endl;
+        outStream <<QString::number(i->getPurchaseNr()).toUtf8()<<endl;
+        outStream <<i->getPurchaseDate().toUtf8()<<endl;
+        outStream <<i->getPurchaseValue().toUtf8()<<endl;
+        outStream <<QString::number(i->getProductsAmount()).toUtf8()<<endl;
     }
 
     caFile.close();

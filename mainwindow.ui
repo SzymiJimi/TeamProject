@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1142</width>
+    <height>653</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1141</width>
+      <height>601</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="currentIndex">
+     <number>3</number>
+    </property>
+    <widget class="QWidget" name="mainTab">
+     <attribute name="title">
+      <string>Menu Główne</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>120</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zakup</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>200</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sprawdź dostępność produktu w magazynie</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>280</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stwórz fakturę</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>360</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Przyjęcie towaru do magazynu</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>440</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Historia zakupów</string>
+      </property>
+     </widget>
+     <widget class="QCalendarWidget" name="calendarWidget">
+      <property name="geometry">
+       <rect>
+        <x>760</x>
+        <y>310</y>
+        <width>312</width>
+        <height>183</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="showClientsButton">
+      <property name="geometry">
+       <rect>
+        <x>810</x>
+        <y>60</y>
+        <width>231</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pokaż klientów</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="saleTab">
+     <attribute name="title">
+      <string>Sprzedaż</string>
+     </attribute>
+     <widget class="QTableWidget" name="purchasedProductTable">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>50</y>
+        <width>601</width>
+        <height>481</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>120</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Nazwa produktu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena za jednostkę</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ilość</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Jednostka</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Kod produktu</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_12">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>70</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rozpocznij sprzedaż</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>20</y>
+        <width>191</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Lista dodanych produktów</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="productCodeField">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>190</y>
+        <width>191</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addPurchasedItem">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>240</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>170</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Kod produktu</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>170</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ilość</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="returnMessage">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>240</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wiadomość zwrotna</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="finishShopping">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>350</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zakończ zakupy</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_15">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>240</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usuń ostatni</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_16">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>70</y>
+        <width>81</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usuń</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="productsAmount">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>190</y>
+        <width>71</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>320</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cena zakupów:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="purchasePrice">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>310</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="warehouseTab">
+     <attribute name="title">
+      <string>Magazyn</string>
+     </attribute>
+     <widget class="QTableWidget" name="productsTable">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>1101</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>1101</width>
+        <height>0</height>
+       </size>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>200</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Kod produktu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nazwa produktu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Marka</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ilość</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Jednostka</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Stawka VAT</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Data ważności</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Data dodania</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="geometry">
+       <rect>
+        <x>230</x>
+        <y>10</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Znajdź w magazynie</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="addProductButton">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>10</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj produkt</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="geometry">
+       <rect>
+        <x>630</x>
+        <y>10</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usuń produkt</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="changePriceOfProduct">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>10</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zmień cenę produktu</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>50</y>
+        <width>171</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dostępne produkty w magazynie</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="invoiceTab">
+     <attribute name="title">
+      <string>Paragony i faktury</string>
+     </attribute>
+     <widget class="QTableWidget" name="shoppingTable">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>801</width>
+        <height>511</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>200</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Numer zakupu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Data zakupu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena zakupów</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ilość sprzedanych produktów</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>100</y>
+        <width>241</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stwórz fakturę</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ostatnie zakupy</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="receiptButton">
+      <property name="geometry">
+       <rect>
+        <x>860</x>
+        <y>180</y>
+        <width>241</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stwórz paragon</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Klienci</string>
+     </attribute>
+     <widget class="QTableWidget" name="ClientsTable">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>941</width>
+        <height>491</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>931</width>
+        <height>0</height>
+       </size>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>116</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Imię</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nazwisko</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>PESEL</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>NIP</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ulica</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Numer domu</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Kod pocztowy</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Miejscowość</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="addClientButton">
+      <property name="geometry">
+       <rect>
+        <x>960</x>
+        <y>80</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj klienta</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_18">
+      <property name="geometry">
+       <rect>
+        <x>960</x>
+        <y>150</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usuń klienta</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_19">
+      <property name="geometry">
+       <rect>
+        <x>960</x>
+        <y>220</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Generuj fakturę</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_20">
+      <property name="geometry">
+       <rect>
+        <x>960</x>
+        <y>280</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Edytuj dane klienta</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Klienci w bazie</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1142</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

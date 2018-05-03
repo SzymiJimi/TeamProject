@@ -17,9 +17,10 @@ public:
     explicit AddClient(QWidget *parent = 0);
     Client* getValues();
     ~AddClient();
+    void setFormForEdit(Client client);
 
 private slots:
-    void on_buttonBox_clicked(QAbstractButton *button);
+//    void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
     Ui::AddClient *ui;

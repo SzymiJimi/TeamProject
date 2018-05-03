@@ -17,6 +17,7 @@ public:
     explicit InvoiceDialog(QWidget *parent = 0);
     void addClientsFromFileToTable();
     int getSelectedRow();
+    int getIdFromTable(int row);
     ~InvoiceDialog();
 
 private:

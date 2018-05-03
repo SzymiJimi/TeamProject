@@ -19,9 +19,14 @@ AddProduct::~AddProduct()
 Product *AddProduct::getProductFromFrom()
 {
     Product *product = new Product();
-    std::list<Product>::reverse_iterator it=Product::products.rbegin();
-    Product last=*it;
-    product->setId(last.getId()+1);
+    if(Product::products.empty()){
+        product->setId(1);
+    }
+    else{
+        std::list<Product>::reverse_iterator it=Product::products.rbegin();
+        Product last=*it;
+        product->setId(last.getId()+1);
+    }
     product->setName(ui->name->text());
     product->setBrand(ui->brand->text());
     QString quantity = ui->quantity->text();

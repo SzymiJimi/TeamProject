@@ -45,7 +45,8 @@ public:
     void saveToFile(std::list<Product> clients);
     static void addFromFileToTable(Ui::MainWindow * window);
     Product findProductById(int productId);
-
+    static bool deleteProductById(int productId);
+    bool operator <(const Product &other);
 
     static std::list<Product> products;
 

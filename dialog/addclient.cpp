@@ -16,6 +16,18 @@ AddClient::~AddClient()
     delete ui;
 }
 
+void AddClient::setFormForEdit(Client client)
+{
+    ui->name->setText(client.getName());
+    ui->surname->setText(client.getSurname());
+    ui->pesel->setText(client.getPesel());
+    ui->nip->setText(client.getNip());
+    ui->street->setText(client.getStreet());
+    ui->houseNr->setText(client.getHouseNr());
+    ui->postalCode->setText(client.getPostalCode());
+    ui->city->setText(client.getCity());
+}
+
 Client* AddClient::getValues(){
     QString name= ui->name->text();
     QString surname=ui->surname->text();
@@ -28,7 +40,7 @@ Client* AddClient::getValues(){
     return new Client(0, name,surname,pesel,nip, street,houseNr, postalCode, city);
 }
 
-void AddClient::on_buttonBox_clicked(QAbstractButton *button)
-{
+//void AddClient::on_buttonBox_clicked(QAbstractButton *button)
+//{
 
-}
+//}

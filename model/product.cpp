@@ -241,3 +241,21 @@ Product Product::findProductById(int productId){
 
 }
 
+bool Product::deleteProductById(int productId){
+    prodId=productId;
+    std::list<Product>::iterator findIter = std::find_if(products.begin(), products.end(), productIdIsEqual);
+    qDebug()<<"Znaleziony produkt w findProductById: "<<(&findIter);
+    if(findIter!=products.end()){
+
+        products.erase(findIter);
+        return true;
+}
+    else
+        return false;
+}
+
+bool Product::operator <(const Product &other)
+{
+     return id  < other.id;
+}
+

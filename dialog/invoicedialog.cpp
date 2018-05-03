@@ -37,6 +37,12 @@ int InvoiceDialog::getSelectedRow()
     return ui->ClientsTableForInvoice->currentRow();
 }
 
+int InvoiceDialog::getIdFromTable(int row)
+{
+    QString idString =  ui->ClientsTableForInvoice->item(row,0)->text();
+    return idString.toInt();
+}
+
 InvoiceDialog::~InvoiceDialog()
 {
     delete ui;

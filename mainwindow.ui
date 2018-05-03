@@ -48,7 +48,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="mainTab">
      <attribute name="title">
@@ -90,7 +90,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Stwórz fakturę</string>
+       <string>Stwórz paragon/fakturę</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_4">
@@ -103,7 +103,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Przyjęcie towaru do magazynu</string>
+       <string>Klienci</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_5">
@@ -455,7 +455,7 @@
        <string>Dodaj produkt</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_8">
+     <widget class="QPushButton" name="deleteProductButton">
       <property name="geometry">
        <rect>
         <x>630</x>
@@ -532,7 +532,7 @@
        </property>
       </column>
      </widget>
-     <widget class="QPushButton" name="pushButton_10">
+     <widget class="QPushButton" name="invoiceButton">
       <property name="geometry">
        <rect>
         <x>860</x>
@@ -653,7 +653,7 @@
        <string>Dodaj klienta</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_18">
+     <widget class="QPushButton" name="deleteClientButton">
       <property name="geometry">
        <rect>
         <x>960</x>
@@ -679,7 +679,7 @@
        <string>Generuj fakturę</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_20">
+     <widget class="QPushButton" name="editClientButton">
       <property name="geometry">
        <rect>
         <x>960</x>

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <list>
+#include <QDebug>
 
 class Client
 {
@@ -42,6 +43,10 @@ public:
 
     std::list<Client> loadClientsFromFile();
     void saveClientsToFile(std::list<Client> clients);
+    Client findClientById(int clientId, std::list<Client> clients);
+    static bool deleteClientById(int clientId, std::list<Client> &clients);
+    static QString getInfoAboutClientToInvoice(int clientId, std::list<Client> clients);
+    bool operator <(const Client &other);
 
 };
 

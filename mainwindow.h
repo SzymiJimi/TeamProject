@@ -11,7 +11,7 @@
 #include <list>
 #include "model/product.h"
 #include "dialog/invoicedialog.h"
-
+#include <dialog/producttosaledialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -63,6 +63,10 @@ private slots:
 
     void on_editClientButton_clicked();
 
+    void on_productSearchButton_clicked();
+
+    void on_deleteProductBeforeSale_clicked();
+
 private:
     std::list<Client> clients;
 
@@ -74,4 +78,4 @@ public:
 
 
 
-#endif // MAINWINDOW_
+#endif // MAINWINDOW_H

@@ -219,47 +219,53 @@ void MainWindow::on_addProductButton_clicked()
 void MainWindow::on_receiptButton_clicked()
 {
     int idTmp=ui->shoppingTable->currentRow();
-    QString itabtext =ui->shoppingTable->item(idTmp,0)->text();
-    idTmp= itabtext.toInt();
-    Sale sale=Sale::findSaleById(idTmp);
-    idTmp=sale.getId();
-    std::list<ProductSales> concreteSales=ProductSales::findProductSalesBySaleId(idTmp);
+    if(idTmp>=0){
+        QString itabtext =ui->shoppingTable->item(idTmp,0)->text();
+        idTmp= itabtext.toInt();
+        Sale sale=Sale::findSaleById(idTmp);
+        idTmp=sale.getId();
+        std::list<ProductSales> concreteSales=ProductSales::findProductSalesBySaleId(idTmp);
 
-    std::list<ProductSales>::iterator it=concreteSales.begin();
+        std::list<ProductSales>::iterator it=concreteSales.begin();
 
-    QString content="";
-    Product product;
-    for (; it != concreteSales.end(); it++){
-        product=product.findProductById(it->getProductId());
-        QString idQString = QString::number(product.getId());
-        content+= idQString + "   " + product.getName() +"<br>";
+        QString content="";
+        Product product;
+        for (; it != concreteSales.end(); it++){
+            product=product.findProductById(it->getProductId());
+            QString idQString = QString::number(product.getId());
+            QString quantityQString = QString::number(it->roundQuantityTo2DecimalPlaces());
+            QString price = QString::number(product.getPrice());
+            content+= idQString + "   " + product.getName() + " " + quantityQString+ "x" + price + "<br>";
 
+        }
+        content+="<br>- - - - - - - - - - - - - - - - - - - - - - -<br>RAZEM:   ";
+        content += sale.getShippingPrice() + " PLN";
+        PDFCreator::printReceipt(content);
     }
-    content+="<br>- - - - - - - - - - - - - - - - - - - - - - -<br>RAZEM:   ";
-    content += sale.getShippingPrice();
-    PDFCreator::printReceipt(content);
 }
 
 
 void MainWindow::on_invoiceButton_clicked()
 {
-    InvoiceDialog invoiceDialog;
-    invoiceDialog.setModal(true);
-    invoiceDialog.addClientsFromFileToTable();
-    int id=-1;
-    int idClient;
-    if(invoiceDialog.exec()==QDialog::Accepted){
-        id=invoiceDialog.getSelectedRow();
-    }
-    if(id!=-1){
-        idClient=invoiceDialog.getIdFromTable(id);
-        QString clientInfo = Client::getInfoAboutClientToInvoice(idClient, this->clients);
-        int idTmp=ui->shoppingTable->currentRow();
-        QString itabtext =ui->shoppingTable->item(idTmp,0)->text();
-        idTmp= itabtext.toInt();
-        QString productsInfo = PDFCreator::prepareListOfProducts(idTmp);
-        Sale sale=Sale::findSaleById(idTmp);
-        PDFCreator::printInvoice(clientInfo, productsInfo,sale.getShippingPrice());
+    int idShopping=ui->shoppingTable->currentRow();
+    if(idShopping>=0){
+        InvoiceDialog invoiceDialog;
+        invoiceDialog.setModal(true);
+        invoiceDialog.addClientsFromFileToTable();
+        int id=-1;
+        int idClient;
+        if(invoiceDialog.exec()==QDialog::Accepted){
+            id=invoiceDialog.getSelectedRow();
+        }
+        if(id>=0){
+            idClient=invoiceDialog.getIdFromTable(id);
+            QString clientInfo = Client::getInfoAboutClientToInvoice(idClient, this->clients);
+            QString itabtext =ui->shoppingTable->item(idShopping,0)->text();
+            idShopping= itabtext.toInt();
+            QString productsInfo = PDFCreator::prepareListOfProducts(idShopping);
+            Sale sale=Sale::findSaleById(idShopping);
+            PDFCreator::printInvoice(clientInfo, productsInfo,sale.getShippingPrice());
+        }
     }
 }
 
@@ -267,17 +273,19 @@ void MainWindow::on_deleteProductButton_clicked()
 {
     Product product;
     int row = ui->productsTable->currentRow();
-    QString itabtext = ui->productsTable->item(row,0)->text();
-    product = product.findProductById(itabtext.toInt());
-    QString message = "Czy na pewno chcesz usunąć produkt o id " + itabtext + "- " + product.getName();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Usunięcie produktu", message,
-                                  QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        if(Product::deleteProductById(product.getId())){
-            ui->productsTable->setRowCount(0);
-            product.saveToFile(Product::products);
-            Product::addFromFileToTable(ui);
+    if(row>=0){
+        QString itabtext = ui->productsTable->item(row,0)->text();
+        product = product.findProductById(itabtext.toInt());
+        QString message = "Czy na pewno chcesz usunąć produkt o id " + itabtext + "- " + product.getName();
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Usunięcie produktu", message,
+                                      QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            if(Product::deleteProductById(product.getId())){
+                ui->productsTable->setRowCount(0);
+                product.saveToFile(Product::products);
+                Product::addFromFileToTable(ui);
+            }
         }
     }
 }
@@ -285,20 +293,22 @@ void MainWindow::on_deleteProductButton_clicked()
 void MainWindow::on_deleteClientButton_clicked()
 {
     int row = ui->ClientsTable->currentRow();
-    QString itabtext = ui->ClientsTable->item(row,0)->text();
-    Client client;
-    client = client.findClientById(itabtext.toInt(), clients);
-    QString message = "Czy na pewno chcesz usunąć klienta o id " + itabtext + "- " + client.getName() + " "+ client.getSurname();
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Usunięcie klienta", message,
-                                  QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        qDebug() << "Yes was clicked";
-        if(Client::deleteClientById(client.getId(), this->clients)){
-            SaveFile save;
-            save.saveClientsToFile(this->clients);
-            ui->ClientsTable->setRowCount(0);
-            addClientsFromFileToTable();
+    if(row>=0){
+        QString itabtext = ui->ClientsTable->item(row,0)->text();
+        Client client;
+        client = client.findClientById(itabtext.toInt(), clients);
+        QString message = "Czy na pewno chcesz usunąć klienta o id " + itabtext + "- " + client.getName() + " "+ client.getSurname();
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Usunięcie klienta", message,
+                                      QMessageBox::Yes|QMessageBox::No);
+        if (reply == QMessageBox::Yes) {
+            qDebug() << "Yes was clicked";
+            if(Client::deleteClientById(client.getId(), this->clients)){
+                SaveFile save;
+                save.saveClientsToFile(this->clients);
+                ui->ClientsTable->setRowCount(0);
+                addClientsFromFileToTable();
+            }
         }
     }
 }
@@ -306,46 +316,80 @@ void MainWindow::on_deleteClientButton_clicked()
 void MainWindow::on_changePriceOfProduct_clicked()
 {
     int row = ui->productsTable->currentRow();
-    QString itabtext = ui->productsTable->item(row,0)->text();
-    Product product;
-    product = product.findProductById(itabtext.toInt());
-    AddProduct addProduct;
-    addProduct.setModal(true);
-    addProduct.setFormForEdit(product);
-    if(addProduct.exec()==QDialog::Accepted){
-        Product::deleteProductById(product.getId());
-        Product* productAfterEdit=addProduct.getProductFromFrom();
-        productAfterEdit->setId(itabtext.toInt());
-        Product::products.push_back(*productAfterEdit);
-        Product::products.sort();
-        product.saveToFile(Product::products);
-        ui->productsTable->setRowCount(0);
-        Product::addFromFileToTable(ui);
-        delete productAfterEdit;
+    if(row>=0){
+        QString itabtext = ui->productsTable->item(row,0)->text();
+        Product product;
+        product = product.findProductById(itabtext.toInt());
+        AddProduct addProduct;
+        addProduct.setModal(true);
+        addProduct.setFormForEdit(product);
+        if(addProduct.exec()==QDialog::Accepted){
+            Product::deleteProductById(product.getId());
+            Product* productAfterEdit=addProduct.getProductFromFrom();
+            productAfterEdit->setId(itabtext.toInt());
+            Product::products.push_back(*productAfterEdit);
+            Product::products.sort();
+            product.saveToFile(Product::products);
+            ui->productsTable->setRowCount(0);
+            Product::addFromFileToTable(ui);
+            delete productAfterEdit;
+        }
     }
 }
 
 void MainWindow::on_editClientButton_clicked()
 {
     int row = ui->ClientsTable->currentRow();
-    QString itabtext = ui->ClientsTable->item(row,0)->text();
-    Client client;
-    client = client.findClientById(itabtext.toInt(), clients);
-    AddClient addClient;
-    addClient.setModal(true);
-    addClient.setFormForEdit(client);
-     if(addClient.exec()==QDialog::Accepted){
-        Client::deleteClientById(itabtext.toInt(), this->clients);
-        Client* clientAfterEdit = addClient.getValues();
-        clientAfterEdit->setId(itabtext.toInt());
-        this->clients.push_back(*clientAfterEdit);
-        clients.sort();
-        SaveFile save;
-        save.saveClientsToFile(this->clients);
-        ui->ClientsTable->setRowCount(0);
-        addClientsFromFileToTable();
-        delete clientAfterEdit;
-     }
+    if(row>=0){
+        QString itabtext = ui->ClientsTable->item(row,0)->text();
+        Client client;
+        client = client.findClientById(itabtext.toInt(), clients);
+        AddClient addClient;
+        addClient.setModal(true);
+        addClient.setFormForEdit(client);
+        if(addClient.exec()==QDialog::Accepted){
+            Client::deleteClientById(itabtext.toInt(), this->clients);
+            Client* clientAfterEdit = addClient.getValues();
+            clientAfterEdit->setId(itabtext.toInt());
+            this->clients.push_back(*clientAfterEdit);
+            clients.sort();
+            SaveFile save;
+            save.saveClientsToFile(this->clients);
+            ui->ClientsTable->setRowCount(0);
+            addClientsFromFileToTable();
+            delete clientAfterEdit;
+        }
+    }
 }
 
+void MainWindow::on_productSearchButton_clicked()
+{
+    ProductToSaleDialog productToSaleDialog;
+    productToSaleDialog.setModal(true);
+    productToSaleDialog.addProductsToTable();
+    int row=-1;
+    QString id;
+    if(productToSaleDialog.exec()==QDialog::Accepted){
+        row = productToSaleDialog.getSelectedRow();
+    }
+    if(row>=0){
+        id=productToSaleDialog.getIdQStringFromTable(row);
+    }
 
+    ui->productCodeField->setText(id);
+}
+
+void MainWindow::on_deleteProductBeforeSale_clicked()
+{
+    if(ui->purchasedProductTable->rowCount()>0){
+        int row = ui->purchasedProductTable->currentRow();
+        double purchasePrice= ui->purchasePrice->text().toDouble();
+        double priceOfDeletedProducts = ui->purchasedProductTable->item(row, 4)->text().toDouble();
+        priceOfDeletedProducts = (round(priceOfDeletedProducts*100))/100;
+        ui->purchasedProductTable->removeRow(row);
+        purchasePrice -=priceOfDeletedProducts;
+        purchasePrice = (round(purchasePrice*100))/100;
+        ui->purchasePrice->setText(QString::number(purchasePrice));
+        qDebug() << purchasePrice;
+    }
+}

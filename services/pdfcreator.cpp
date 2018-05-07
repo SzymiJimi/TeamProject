@@ -84,6 +84,7 @@ QString PDFCreator::prepareListOfProducts(int idSale)
     QString idQString;
     QString numberOfProduct;
     QString priceString;
+    QString quantityString;
     int counter=1;
     Product product;
     for (; it != concreteSales.end(); it++){
@@ -91,11 +92,12 @@ QString PDFCreator::prepareListOfProducts(int idSale)
         idQString = QString::number(product.getId());
         numberOfProduct = QString::number(counter);
         priceString=QString::number(product.getPrice());
+        quantityString = QString::number(it->roundQuantityTo2DecimalPlaces());
         content+="<tr><td>"+numberOfProduct+"</td>"
                 "<td>"+idQString+"</td>"
                 "<td>"+product.getName()+"</td>"
                 "<td>"+product.getUnit()+"</td>"
-                "<td>do zrobienia</td>"
+                "<td>"+quantityString+"</td>"
                 "<td>"+priceString+" PLN</td>"
                 "<td>"+product.getVAT()+"</td></tr>";
         counter++;

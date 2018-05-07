@@ -75,6 +75,10 @@ void ProductSales::loadFromFile(){
          position=productIdFile.lastIndexOf(QChar('\n'));
          productIdFile=productIdFile.left(position);
 
+         QString quantityFile=inFile.readLine();
+         position=quantityFile.lastIndexOf(QChar('\n'));
+         quantityFile=quantityFile.left(position);
+
          QString saleIdFile=inFile.readLine();
          position=saleIdFile.lastIndexOf(QChar('\n'));
 
@@ -84,6 +88,7 @@ void ProductSales::loadFromFile(){
 
          productSales.setProductSaleId(productSaleIdFile.toInt());
          productSales.setProductId(productIdFile.toInt());
+         productSales.setQuantity(quantityFile.toFloat());
          productSales.setSaleId(saleIdFile.toInt());
 
          productsSales.push_back(productSales);
@@ -105,10 +110,20 @@ void ProductSales::saveToFile(){
     for(i=productsSales.begin(); i!=productsSales.end();i++){
         outStream <<QString::number(i->getProductSaleId())<<endl;
         outStream <<QString::number(i->getProductId())<<endl;
+        outStream <<QString::number(i->getQuantity()) << endl;
         outStream <<QString::number(i->getSaleId())<<endl;
     }
 
     caFile.close();
+}
+
+float ProductSales::roundQuantityTo2DecimalPlaces()
+{
+    float result = this->quantity*100;
+    int tmp = (int)result;
+    result =(float)tmp/100;
+
+    return result;
 }
 
 std::list<ProductSales> ProductSales::findProductSalesBySaleId(int id)

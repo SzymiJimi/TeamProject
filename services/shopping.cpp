@@ -35,6 +35,7 @@ void Shopping::buyProducts( Ui::MainWindow * window){
         qDebug()<<"Product id z tabeli"<<element.toInt();
         addingItem.setProductId(element.toInt());
         addingItem.setSaleId(sale.getId());
+        addingItem.setQuantity(window->purchasedProductTable->item(i, 2)->text().toFloat());
         ProductSales::productsSales.push_back(addingItem);
     }
 

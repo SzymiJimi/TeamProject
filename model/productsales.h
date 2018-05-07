@@ -21,6 +21,8 @@ public:
 
     void loadFromFile();
     void saveToFile();
+
+    float roundQuantityTo2DecimalPlaces();
     static std::list<ProductSales> findProductSalesBySaleId(int id);
 //    static void addFromFileToTable(Ui::MainWindow * window);
 

@@ -37,7 +37,8 @@ SOURCES += \
     services/shopping.cpp \
     dialog/addproduct.cpp \
     services/pdfcreator.cpp \
-    dialog/invoicedialog.cpp
+    dialog/invoicedialog.cpp \
+    dialog/producttosaledialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,11 +53,13 @@ HEADERS += \
     services/shopping.h \
     dialog/addproduct.h \
     services/pdfcreator.h \
-    dialog/invoicedialog.h
+    dialog/invoicedialog.h \
+    dialog/producttosaledialog.h
 
 FORMS += \
         mainwindow.ui \
     dialog/addclient.ui \
     dialog/finddialog.ui \
     dialog/addproduct.ui \
-    dialog/invoicedialog.ui
+    dialog/invoicedialog.ui \
+    dialog/producttosaledialog.ui

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FindDialog</class>
- <widget class="QDialog" name="FindDialog">
+ <class>ProductToSaleDialog</class>
+ <widget class="QDialog" name="ProductToSaleDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>848</width>
-    <height>202</height>
+    <width>850</width>
+    <height>335</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Wybranie produktu do sprzedania</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>130</y>
-     <width>221</width>
-     <height>41</height>
+     <x>480</x>
+     <y>300</y>
+     <width>341</width>
+     <height>32</height>
     </rect>
    </property>
    <property name="orientation">
@@ -29,70 +29,16 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>10</y>
-     <width>261</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Wpisz kod produktu, który chcesz wyszukać</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="productId">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>50</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="findButton">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>50</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Szukaj</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="resultTitle">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>80</y>
-     <width>101</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Znaleziony produkt</string>
-   </property>
-  </widget>
-  <widget class="QTableWidget" name="foundProductTable">
+  <widget class="QTableWidget" name="productToSaleTable">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>110</y>
-     <width>821</width>
-     <height>81</height>
+     <y>0</y>
+     <width>831</width>
+     <height>291</height>
     </rect>
    </property>
    <column>
@@ -142,7 +88,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>FindDialog</receiver>
+   <receiver>ProductToSaleDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -158,7 +104,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>FindDialog</receiver>
+   <receiver>ProductToSaleDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

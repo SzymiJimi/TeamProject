@@ -34,7 +34,12 @@ void InvoiceDialog::addClientsFromFileToTable()
 
 int InvoiceDialog::getSelectedRow()
 {
-    return ui->ClientsTableForInvoice->currentRow();
+    int id = ui->ClientsTableForInvoice->currentRow();
+    if(id>=0){
+        return id;
+    }
+    else
+        return -1;
 }
 
 int InvoiceDialog::getIdFromTable(int row)

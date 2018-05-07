@@ -45,6 +45,8 @@ Product *AddProduct::getProductFromFrom()
 
 void AddProduct::setFormForEdit(Product product)
 {
+    QWidget::setWindowTitle("Edytuj produkt");
+    ui->label_9->setText("Wprowadź dane do edycji");
     ui->name->setText(product.getName());
     ui->brand->setText(product.getBrand());
     QString quantity = QString::number(product.getQuantity());

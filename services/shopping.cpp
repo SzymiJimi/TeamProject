@@ -12,6 +12,7 @@ Shopping::Shopping()
 
 void Shopping::buyProducts( Ui::MainWindow * window){
 
+    if(window->purchasePrice->text().toDouble()>0){
     int rowCount = window->purchasedProductTable->rowCount();
     Sale sale;
     sale.setId((int)Sale::sales.size()+1);
@@ -37,10 +38,20 @@ void Shopping::buyProducts( Ui::MainWindow * window){
         addingItem.setSaleId(sale.getId());
         addingItem.setQuantity(window->purchasedProductTable->item(i, 2)->text().toFloat());
         ProductSales::productsSales.push_back(addingItem);
+        product = product.findProductById(element.toInt());
+        Product::deleteProductById(element.toInt());
+        product.setQuantity(product.getQuantity()-window->purchasedProductTable->item(i, 2)->text().toFloat());
+        Product::products.push_back(product);
+        Product::products.sort();
+        product.saveToFile(Product::products);
+
     }
 
     window->purchasedProductTable->setRowCount(0);
     window->purchasePrice->setText("0");
+    }
+    else
+        window->returnMessage->setText("Nie wybrano produktów!");
 
 
 }

@@ -180,6 +180,8 @@ void MainWindow::on_finishShopping_clicked()
 {
      Shopping shopping;
      shopping.buyProducts(ui);
+     ui->productsTable->setRowCount(0);
+     Product::addFromFileToTable(ui);
 }
 
 void MainWindow::on_addProductButton_clicked()
@@ -381,8 +383,8 @@ void MainWindow::on_productSearchButton_clicked()
 
 void MainWindow::on_deleteProductBeforeSale_clicked()
 {
-    if(ui->purchasedProductTable->rowCount()>0){
-        int row = ui->purchasedProductTable->currentRow();
+    int row = ui->purchasedProductTable->currentRow();
+    if(ui->purchasedProductTable->rowCount()>0 && row>=0){
         double purchasePrice= ui->purchasePrice->text().toDouble();
         double priceOfDeletedProducts = ui->purchasedProductTable->item(row, 4)->text().toDouble();
         priceOfDeletedProducts = (round(priceOfDeletedProducts*100))/100;

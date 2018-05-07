@@ -18,6 +18,8 @@ AddClient::~AddClient()
 
 void AddClient::setFormForEdit(Client client)
 {
+    QWidget::setWindowTitle("Edytuj Klienta");
+    ui->label_9->setText("Wprowadź dane do edycji");
     ui->name->setText(client.getName());
     ui->surname->setText(client.getSurname());
     ui->pesel->setText(client.getPesel());

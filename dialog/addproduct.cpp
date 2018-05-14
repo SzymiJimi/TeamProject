@@ -34,11 +34,17 @@ Product *AddProduct::getProductFromFrom()
     product->setUnit(ui->unit->text());
     QString price = ui->price->text();
     product->setPrice(price.toFloat());
-    product->setVAT(ui->VAT->text());
+    QString vat = ui->VAT->text();
+    product->setVAT(vat);
     product->setExpirationDate(ui->expirationDate->text());
     QDateTime t = QDateTime::currentDateTime ();
     QString s = t.toString("dd.MM.yyyy");
     product->setAddDate(s);
+
+    int position=product->getVAT().lastIndexOf(QChar('%'));
+    float vatFloat = vat.left(position).toFloat()*0.01+1;
+    float nettoPrice = product->getPrice()/vatFloat;
+    product->setNettoPrice(nettoPrice);
 
     return product;
 }

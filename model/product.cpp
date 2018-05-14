@@ -50,6 +50,11 @@ QString Product::getAddDate(){
     return this->addDate;
 }
 
+float Product::getNettoPrice()
+{
+    return this->nettoPrice;
+}
+
 void Product::setId(int id){
     this->id=id;
 }
@@ -84,6 +89,11 @@ void Product::setExpirationDate(QString expirationDate){
 
 void Product::setAddDate(QString addDate){
     this->addDate=addDate;
+}
+
+void Product::setNettoPrice(float nettoPrice)
+{
+    this->nettoPrice=nettoPrice;
 }
 
 std::list<Product> Product::loadFromFile(){
@@ -155,6 +165,11 @@ std::list<Product> Product::loadFromFile(){
          product.setExpirationDate(expirationDateFile);
          product.setAddDate(addDateFile);
 
+         position=VATFile.lastIndexOf(QChar('%'));
+         float vatFloat = VATFile.left(position).toFloat()*0.01+1;
+         float nettoPrice = product.getPrice()/vatFloat;
+         product.setNettoPrice(nettoPrice);
+
          products.push_back(product);
      }
      in.close();
@@ -200,7 +215,7 @@ void Product::addFromFileToTable(Ui::MainWindow * window){
             qDebug()<<"W petli";
             idString = QString::number(i->getId());
             quantityString= QString::number(i->getQuantity());
-            priceString= QString::number(i->getPrice());
+            priceString= QString::number(i->getPrice(),'f',2);
 
             window->productsTable->insertRow(window->productsTable->rowCount());
             window->productsTable->setItem(window->productsTable->rowCount()-1, 0, new QTableWidgetItem(idString));

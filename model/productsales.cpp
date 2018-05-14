@@ -128,6 +128,7 @@ float ProductSales::roundQuantityTo2DecimalPlaces()
 
 std::list<ProductSales> ProductSales::findProductSalesBySaleId(int id)
 {
+    qDebug() << "SPRZEDAŻ CD: " << id;
     std::list<ProductSales> concreteSales;
     std::list<ProductSales>::iterator it2=productsSales.begin();
     ProductSales productSale;

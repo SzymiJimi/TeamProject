@@ -148,8 +148,8 @@ void MainWindow::on_addPurchasedItem_clicked()
         double amount = ui->productsAmount->value();
         if(amount>0){
         double cost=(round((amount * product.getPrice())*100))/100;
-        QString costString = QString::number(cost);
-        QString priceString = QString::number(product.getPrice());
+        QString costString = QString::number(cost, 'f',2);
+        QString priceString = QString::number(product.getPrice(),'f',2);
         if(amount>product.getQuantity()){
             ui->returnMessage->setText("Za duża ilość(max:"+QString::number(product.getQuantity())+")");
         }else{
@@ -157,7 +157,7 @@ void MainWindow::on_addPurchasedItem_clicked()
         qDebug()<<"Aktualna cena zakupów:"<<purchasePrice;
         purchasePrice=purchasePrice+cost;
         purchasePrice = (round(purchasePrice*100))/100;
-        ui->purchasePrice->setText(QString::number(purchasePrice));
+        ui->purchasePrice->setText(QString::number(purchasePrice, 'f',2));
         ui->returnMessage->setText("Znaleziono produkt!");
         ui->purchasedProductTable->insertRow(ui->purchasedProductTable->rowCount());
         ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 0, new QTableWidgetItem(product.getName()));
@@ -225,7 +225,6 @@ void MainWindow::on_receiptButton_clicked()
         QString itabtext =ui->shoppingTable->item(idTmp,0)->text();
         idTmp= itabtext.toInt();
         Sale sale=Sale::findSaleById(idTmp);
-        idTmp=sale.getId();
         std::list<ProductSales> concreteSales=ProductSales::findProductSalesBySaleId(idTmp);
 
         std::list<ProductSales>::iterator it=concreteSales.begin();
@@ -236,7 +235,7 @@ void MainWindow::on_receiptButton_clicked()
             product=product.findProductById(it->getProductId());
             QString idQString = QString::number(product.getId());
             QString quantityQString = QString::number(it->roundQuantityTo2DecimalPlaces());
-            QString price = QString::number(product.getPrice());
+            QString price = QString::number(product.getPrice(),'f',2);
             content+= idQString + "   " + product.getName() + " " + quantityQString+ "x" + price + "<br>";
 
         }

@@ -53,14 +53,9 @@ void PDFCreator::printInvoice(QString clientInfo, QString content, QString price
             "</div>"
             "<br><br>"
             "<table BORDER = '1' style='width:100%'>"
-          "<tr><th>L.p.</th><th>ID towaru</th><th>Nazwa towaru</th><th>JM</th><th>Ilość</th><th>Cena</th><th>Stawka VAT</th></tr>"
-        +content +
-        "</table>"
-        "<br><br>"
-        "<table BORDER = '1' style='width:20%; float:right'>"
-          "<tr><th>Razem</th></tr>"
-          "<tr>"
-            "<td>" + price +"PLN"
+          "<tr><th>L.p.</th><th>ID towaru</th><th>Nazwa towaru</th><th>JM</th><th>Cena netto</th><th>Stawka VAT</th><th>Cena brutto</th><th>Ilość</th><th>Łącznie netto</th><th>Łącznie brutto</th></tr>"
+        +content + "<td>" +
+         price +"PLN"
          "</td>"
           "</tr>"
         "</table>";
@@ -83,25 +78,35 @@ QString PDFCreator::prepareListOfProducts(int idSale)
     QString content="";
     QString idQString;
     QString numberOfProduct;
-    QString priceString;
     QString quantityString;
     int counter=1;
+    float addNetto=0;
     Product product;
     for (; it != concreteSales.end(); it++){
         product=product.findProductById(it->getProductId());
         idQString = QString::number(product.getId());
         numberOfProduct = QString::number(counter);
-        priceString=QString::number(product.getPrice());
         quantityString = QString::number(it->roundQuantityTo2DecimalPlaces());
+
         content+="<tr><td>"+numberOfProduct+"</td>"
                 "<td>"+idQString+"</td>"
                 "<td>"+product.getName()+"</td>"
                 "<td>"+product.getUnit()+"</td>"
+                "<td>"+QString::number(product.getNettoPrice(), 'f', 2)+" PLN</td>"
+                "<td>"+product.getVAT()+"</td>"
+                "<td>"+QString::number(product.getPrice(), 'f', 2) + " PLN</td>"
                 "<td>"+quantityString+"</td>"
-                "<td>"+priceString+" PLN</td>"
-                "<td>"+product.getVAT()+"</td></tr>";
+                "<td>"+QString::number(product.getNettoPrice()*it->getQuantity(), 'f', 2) +" PLN</td>"
+                "<td>"+QString::number(product.getPrice()*it->getQuantity(), 'f',2)+" PLN</td></tr>";
         counter++;
+        addNetto+=product.getNettoPrice()*it->getQuantity();
 
     }
+    content+="</table>"
+             "<br><br>"
+             "<table BORDER = '1' style='width:20%; float:right'>"
+               "<tr><th>Razem brutto</th><th>Razem netto</th></tr>"
+               "<tr>"
+                 "<td>" + QString::number(addNetto, 'f', 2) +" PLN</td>";
     return content;
 }

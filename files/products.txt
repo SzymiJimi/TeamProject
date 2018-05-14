@@ -1,7 +1,7 @@
 1
 Batonik czekoladowy
 Mars
-96
+88
 szt.
 1.5
 7%
@@ -19,7 +19,7 @@ kg
 3
 Jabłko
 Jabłonix
-40
+34
 kg
 2.6
 7%
@@ -28,7 +28,7 @@ kg
 4
 Kurczak
 OKZ
-20
+15
 szt.
 40.5
 7%

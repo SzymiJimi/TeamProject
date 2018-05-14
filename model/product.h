@@ -18,6 +18,7 @@ private:
     QString VAT;
     QString expirationDate;
     QString addDate;
+    float nettoPrice;
 
 public:
     Product();
@@ -30,6 +31,7 @@ public:
     QString getVAT();
     QString getExpirationDate();
     QString getAddDate();
+    float getNettoPrice();
 
     void setId(int id);
     void setName(QString name);
@@ -40,6 +42,7 @@ public:
     void setVAT(QString VAT);
     void setExpirationDate(QString expirationDate);
     void setAddDate(QString addDate);
+    void setNettoPrice(float nettoPrice);
 
     std::list<Product> loadFromFile();
     void saveToFile(std::list<Product> clients);

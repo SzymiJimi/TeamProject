@@ -133,12 +133,12 @@ void Sale::addToSaleTable(Ui::MainWindow *window, Sale sale)
 
 Sale Sale::findSaleById(int id)
 {
-    std::list<Sale>::iterator it=sales.begin();
+    std::list<Sale>::iterator it=Sale::sales.begin();
     Sale sale;
     int counter=0;
     for (; it != Sale::sales.end(); it++){
         sale = *it;
-        if(counter==id){
+        if(it->getId()==id){
             break;
         }
         counter++;

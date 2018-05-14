@@ -28,9 +28,9 @@ void ProductToSaleDialog::addProductsToTable(){
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 0, new QTableWidgetItem(idString));
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 1, new QTableWidgetItem(i->getName()));
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 2, new QTableWidgetItem(i->getBrand()));
-        ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 3, new QTableWidgetItem(quantityString));
+        ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 3, new QTableWidgetItem(priceString));
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 4, new QTableWidgetItem(i->getUnit()));
-        ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 5, new QTableWidgetItem(priceString));
+        ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 5, new QTableWidgetItem(quantityString));
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 6, new QTableWidgetItem(i->getVAT()));
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 7, new QTableWidgetItem(i->getExpirationDate()));
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 8, new QTableWidgetItem(i->getAddDate()));

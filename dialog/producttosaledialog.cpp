@@ -22,7 +22,7 @@ void ProductToSaleDialog::addProductsToTable(){
         qDebug()<<"W petli";
         idString = QString::number(i->getId());
         quantityString= QString::number(i->getQuantity());
-        priceString= QString::number(i->getPrice());
+        priceString= QString::number(i->getPrice(),'f',2);
 
         ui->productToSaleTable->insertRow(ui->productToSaleTable->rowCount());
         ui->productToSaleTable->setItem(ui->productToSaleTable->rowCount()-1, 0, new QTableWidgetItem(idString));

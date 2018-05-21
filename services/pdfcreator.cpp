@@ -105,7 +105,7 @@ QString PDFCreator::prepareListOfProducts(int idSale)
     content+="</table>"
              "<br><br>"
              "<table BORDER = '1' style='width:20%; float:right'>"
-               "<tr><th>Razem brutto</th><th>Razem netto</th></tr>"
+               "<tr><th>Razem netto</th><th>Razem brutto</th></tr>"
                "<tr>"
                  "<td>" + QString::number(addNetto, 'f', 2) +" PLN</td>";
     return content;

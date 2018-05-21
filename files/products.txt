@@ -1,7 +1,7 @@
 1
 Batonik czekoladowy
 Mars
-88
+86
 szt.
 1.5
 7%
@@ -10,7 +10,7 @@ szt.
 2
 Ziemniaki
 Cud Natury
-50
+45.52
 kg
 1.42
 7%
@@ -19,16 +19,16 @@ kg
 3
 Jabłko
 Jabłonix
-34
+30.84
 kg
 2.6
 7%
 10.08.2018
-03.05.2018
+14.05.2018
 4
 Kurczak
 OKZ
-15
+13
 szt.
 40.5
 7%

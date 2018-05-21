@@ -36,7 +36,7 @@ void FindDialog::on_findButton_clicked()
     Product tmp;
     Product product= tmp.findProductById(productId);
     QString quantityString = QString::number(product.getQuantity());
-    QString priceString = QString::number(product.getPrice());
+    QString priceString = QString::number(product.getPrice(),'f',2);
 
     ui->foundProductTable->insertRow(ui->foundProductTable->rowCount());
     ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,0, new QTableWidgetItem(product.getName()));

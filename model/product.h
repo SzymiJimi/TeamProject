@@ -50,6 +50,7 @@ public:
     Product findProductById(int productId);
     static bool deleteProductById(int productId);
     bool operator <(const Product &other);
+    static std::list<Product> findProductsByName(QString name);
 
     static std::list<Product> products;
 

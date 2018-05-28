@@ -23,6 +23,8 @@ private slots:
     void on_findButton_clicked();
 
 
+    void on_findByNameButton_clicked();
+
 private:
     Ui::FindDialog *ui;
 };

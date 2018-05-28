@@ -271,6 +271,19 @@ bool Product::deleteProductById(int productId){
 
 bool Product::operator <(const Product &other)
 {
-     return id  < other.id;
+    return id  < other.id;
+}
+
+std::list<Product> Product::findProductsByName(QString name)
+{
+    name = name.toLower();
+    std::list<Product>::iterator i;
+    std::list <Product> findProducts;
+    for(i=products.begin(); i!=products.end();i++){
+        if(i->getName().toLower().contains(name)){
+            findProducts.push_back(*i);
+        }
+    }
+   return findProducts;
 }
 

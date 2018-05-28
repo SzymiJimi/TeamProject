@@ -37,7 +37,7 @@ void FindDialog::on_findButton_clicked()
     Product product= tmp.findProductById(productId);
     QString quantityString = QString::number(product.getQuantity());
     QString priceString = QString::number(product.getPrice(),'f',2);
-
+    ui->foundProductTable->setRowCount(0);
     ui->foundProductTable->insertRow(ui->foundProductTable->rowCount());
     ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,0, new QTableWidgetItem(product.getName()));
     ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,1, new QTableWidgetItem(product.getBrand()));
@@ -50,4 +50,23 @@ void FindDialog::on_findButton_clicked()
 
     qDebug()<<"Nazwa znalezionego produktu: "<<product.getName();
 
+}
+
+void FindDialog::on_findByNameButton_clicked()
+{
+    ui->foundProductTable->setRowCount(0);
+    QString name = ui->productNameSearch->text();
+    std::list <Product> products = Product::findProductsByName(name);
+    std::list <Product>::iterator it;
+    for(it=products.begin(); it!=products.end();it++){
+        ui->foundProductTable->insertRow(ui->foundProductTable->rowCount());
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,0, new QTableWidgetItem(it->getName()));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,1, new QTableWidgetItem(it->getBrand()));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,2, new QTableWidgetItem(QString::number(it->getPrice(),'f',2)));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,3, new QTableWidgetItem(it->getUnit()));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,4, new QTableWidgetItem(QString::number(it->getQuantity(),'f',2)));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,5, new QTableWidgetItem(it->getVAT()));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,6, new QTableWidgetItem(it->getExpirationDate()));
+        ui->foundProductTable->setItem(ui->foundProductTable->rowCount()-1,7, new QTableWidgetItem(it->getAddDate()));
+    }
 }

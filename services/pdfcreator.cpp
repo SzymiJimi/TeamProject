@@ -53,7 +53,7 @@ void PDFCreator::printInvoice(QString clientInfo, QString content, QString price
             "</div>"
             "<br><br>"
             "<table BORDER = '1' style='width:100%'>"
-          "<tr><th>L.p.</th><th>ID towaru</th><th>Nazwa towaru</th><th>JM</th><th>Cena netto</th><th>Stawka VAT</th><th>Cena brutto</th><th>Ilość</th><th>Łącznie netto</th><th>Łącznie brutto</th></tr>"
+          "<tr><th>L.p.</th><th>ID towaru</th><th>Nazwa towaru</th><th>JM</th><th>Cena netto</th><th>Stawka VAT</th><th>Cena brutto</th><th>Ilość</th><th>Łącznie netto</th><th>Łącznie brutto</th><th>Łącznie VAT</th></tr>"
         +content + "<td>" +
          price +"PLN"
          "</td>"
@@ -97,7 +97,8 @@ QString PDFCreator::prepareListOfProducts(int idSale)
                 "<td>"+QString::number(product.getPrice(), 'f', 2) + " PLN</td>"
                 "<td>"+quantityString+"</td>"
                 "<td>"+QString::number(product.getNettoPrice()*it->getQuantity(), 'f', 2) +" PLN</td>"
-                "<td>"+QString::number(product.getPrice()*it->getQuantity(), 'f',2)+" PLN</td></tr>";
+                "<td>"+QString::number(product.getPrice()*it->getQuantity(), 'f',2)+" PLN</td>"
+                "<td>"+QString::number(product.getPrice()*it->getQuantity()-product.getNettoPrice()*it->getQuantity(), 'f',2)+" PLN</td></tr>";
         counter++;
         addNetto+=product.getNettoPrice()*it->getQuantity();
 
@@ -105,8 +106,9 @@ QString PDFCreator::prepareListOfProducts(int idSale)
     content+="</table>"
              "<br><br>"
              "<table BORDER = '1' style='width:20%; float:right'>"
-               "<tr><th>Razem netto</th><th>Razem brutto</th></tr>"
+               "<tr><th>Razem netto</th><th>Razem VAT</th><th>Razem brutto</th></tr>"
                "<tr>"
-                 "<td>" + QString::number(addNetto, 'f', 2) +" PLN</td>";
+                 "<td>" + QString::number(addNetto, 'f', 2) +" PLN</td>"
+                 "<td>" + QString::number((sale.getShippingPrice().toFloat())-addNetto, 'f',2) + " PLN</td>";
     return content;
 }

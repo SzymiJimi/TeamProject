@@ -150,7 +150,8 @@ void MainWindow::on_addPurchasedItem_clicked()
         double cost=(round((amount * product.getPrice())*100))/100;
         QString costString = QString::number(cost, 'f',2);
         QString priceString = QString::number(product.getPrice(),'f',2);
-        if(amount>product.getQuantity()){
+
+        if((amount>product.getQuantity()) || (Shopping::checkQuantityWithListOfProducts(ui, productCode, amount)==false)){
             ui->returnMessage->setText("Za duża ilość(max:"+QString::number(product.getQuantity())+")");
         }else{
         double purchasePrice= ui->purchasePrice->text().toDouble();
@@ -166,7 +167,7 @@ void MainWindow::on_addPurchasedItem_clicked()
         ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 3, new QTableWidgetItem(product.getUnit()));
         ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 4, new QTableWidgetItem(costString));
         ui->purchasedProductTable->setItem(ui->purchasedProductTable->rowCount()-1, 5, new QTableWidgetItem(QString::number(productCode)));
-          }
+            }
         }else{
             ui->returnMessage->setText("Nie podałeś ilości...");
         }

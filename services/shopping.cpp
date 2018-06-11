@@ -55,3 +55,25 @@ void Shopping::buyProducts( Ui::MainWindow * window){
 
 
 }
+
+bool Shopping::checkQuantityWithListOfProducts(Ui::MainWindow *window, int productId, double amount)
+{
+    int rowCount = window->purchasedProductTable->rowCount();
+    float quantityCurrentSale=0;
+    Product product = Product();
+    product = product.findProductById(productId);
+    float quantity = product.getQuantity();
+    qDebug() << "Quantity " << quantityCurrentSale << endl;
+    for(int i=0;i<rowCount;i++)
+    {
+        if(window->purchasedProductTable->item(i,5)->text().toInt()==productId){
+            quantityCurrentSale+=window->purchasedProductTable->item(i,2)->text().toFloat();
+            qDebug() << "Quantity " << quantityCurrentSale << endl;
+        }
+    }
+    if(quantity>=((float)quantityCurrentSale+amount)){
+        return true;}
+    else{
+        return false;}
+}
+
